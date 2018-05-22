@@ -1,0 +1,67 @@
+<div class="container" ng-controller="ReservationCtrl as ctrl">
+    <div class="jumbotron">
+        <h1 align="center">Reservation de salles</h1>
+        <br>
+        <div id="reservation-form" class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">        
+                <label> Date :  </label>
+            </div>
+            <div class="col-sm-3 justify-content-center text-center pagination-centered center-block">  
+                <md-datepicker ng-model="ctrl.filterDate" ng-change="ctrl.updateSalles()" md-open-on-focus md-date-filter="ctrl.onlyWeekendsPredicate"></md-datepicker>
+            </div>
+        </div>
+        <div class="row">    
+            <div class="col-sm-4">  
+                <label class="justify-content-center text-center  pagination-centered center-block"> Heure : </label>
+            </div>
+            <div class="col-sm-2">
+                <md-select class="" ng-model="ctrl.filterHeure" ng-change="ctrl.updateSalles()">
+                    <md-option ng-repeat="heure in ctrl.heures" ng-value="heure">
+                        {{heure}}
+                    </md-option>
+                </md-select>
+            </div>
+        </div>
+        <br>
+
+        <div ng-if="ctrl.showInfoMessage">
+            Completez la date et l'heure de réservation souhaitées afin d'afficher les salles disponibles. 
+            <br><br><br>
+        </div>
+
+        <div ng-if="!ctrl.showInfoMessage">
+            <h6>Salles disponibles pour le jour et l'heure choisis :</h6>
+            <p></p>            
+            <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Capacite</th>
+                <th>equipements</th>
+                <th>reservations</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="salle in ctrl.salles">
+                <tr>
+                <td>{{ salle.name }}</td>
+                <td>{{ salle.description }}</td>
+                <td>{{ salle.capacity }}</td>
+                <td>{{ salle.equipements }}</td>
+                <td><md-button ng-click="ctrl.reserverSalle(salle.id)">Réserver</md-button></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+
+      </div>
+</div>

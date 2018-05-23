@@ -1,0 +1,14 @@
+.vertical-center {
+    display: flex;
+    align-items: center;
+  }
+
+.successMessage {
+    color: green;
+    font-style: oblique;
+}
+
+.errorMessage {
+    color: red;
+    font-style: oblique;
+}

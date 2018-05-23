@@ -1,30 +1,23 @@
 <div class="container" ng-controller="ReservationCtrl as ctrl">
     <div class="jumbotron">
-        <h1 align="center">Reservation de salles</h1>
-        <br>
-        <div id="reservation-form" class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-
-            </div>
-        </div>
+        <h1 align="center">Réservation de salles</h1>
     </div>
-
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-3">        
-                <label> Date :  </label>
+            <div class="col-sm-2 vertical-center">        
+                <label>Date :</label>
             </div>
-            <div class="col-sm-3 justify-content-center text-center pagination-centered center-block">  
+            <div class="col-sm-3">  
                 <md-datepicker ng-model="ctrl.filterDate" ng-change="ctrl.updateSalles()" md-open-on-focus md-date-filter="ctrl.onlyWeekendsPredicate"></md-datepicker>
             </div>
         </div>
         <div class="row">    
-            <div class="col-sm-4">  
-                <label class="justify-content-center text-center  pagination-centered center-block"> Heure : </label>
+            <div class="col-sm-2 vertical-center">  
+                <label>Heure :</label>
             </div>
-            <div class="col-sm-2">
-                <md-select class="" ng-model="ctrl.filterHeure" ng-change="ctrl.updateSalles()">
+            <div class="col-sm-2 pl-5">
+                <md-select class="ml-4" ng-model="ctrl.filterHeure" ng-change="ctrl.updateSalles()">
                     <md-option ng-repeat="heure in ctrl.heures" ng-value="heure">
                         {{heure}}
                     </md-option>
@@ -33,22 +26,31 @@
         </div>
         <br>
 
-        <div ng-if="ctrl.showInfoMessage">
-            Completez la date et l'heure de réservation souhaitées afin d'afficher les salles disponibles. 
-            <br><br><br>
+        <div ng-if="ctrl.showMessageSuccess" class="successMessage">
+            <br>
+            <h5>Votre réservation a bien été prise en compte.</h5>
+        </div>
+        <div ng-if="ctrl.showMessageError" class="errorMessage">
+            <br>            
+            <h5>Vous arrivez trop tard : la salle a déjà été réservée !</h5>
         </div>
 
-        <div ng-if="!ctrl.showInfoMessage">
-            <h6>Salles disponibles pour le jour et l'heure choisis :</h6>
-            <p></p>            
+        <div ng-if="!ctrl.showListeSalles">
+            <h6>Completez la date et l'heure de réservation souhaitées afin d'afficher les salles disponibles.</h6>
+            <br><br>
+        </div>
+
+        <div ng-if="ctrl.showListeSalles">
+            <br>
+            <p>Salles disponibles pour le jour et l'heure choisis :</p>           
             <table class="table table-bordered">
             <thead>
                 <tr>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Capacite</th>
-                <th>equipements</th>
-                <th>reservations</th>
+                <th>Capacité</th>
+                <th>Equipements</th>
+                <th>Réserver</th>
                 </tr>
             </thead>
             <tbody ng-repeat="salle in ctrl.salles">
@@ -56,7 +58,11 @@
                 <td>{{ salle.name }}</td>
                 <td>{{ salle.description }}</td>
                 <td>{{ salle.capacity }}</td>
-                <td>{{ salle.equipements }}</td>
+                <td class="equipement">
+                    <li ng-repeat="equipement in salle.equipements">
+                        {{ equipement.name }}
+                    </li>
+                </td>
                 <td><md-button ng-click="ctrl.reserverSalle(salle.id)">Réserver</md-button></td>
                 </tr>
             </tbody>

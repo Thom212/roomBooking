@@ -16,8 +16,8 @@
             <div class="col-sm-2 vertical-center">  
                 <label>Heure :</label>
             </div>
-            <div class="col-sm-2 pl-5">
-                <md-select class="ml-4" ng-model="ctrl.filterHeure" ng-change="ctrl.updateSalles()">
+            <div class="col-sm-2">
+                <md-select ng-model="ctrl.filterHeure" ng-change="ctrl.updateSalles()">
                     <md-option ng-repeat="heure in ctrl.heures" ng-value="heure">
                         {{heure}}
                     </md-option>
@@ -42,7 +42,15 @@
 
         <div ng-if="ctrl.showListeSalles">
             <br>
-            <p>Salles disponibles pour le jour et l'heure choisis :</p>           
+            <h6>Salles disponibles pour le jour et l'heure choisis :</h6>
+            <p class="filters">
+                Capacité minimum :  
+                <input class="mr-4" type="number" min="0" max="999" ng-model="ctrl.capacityMin"> 
+                <input class="ml-4" type="checkbox" ng-model="ctrl.tvFilter"> 
+                TV
+                <input class="ml-4" type="checkbox" ng-model="ctrl.rpFilter">
+                Retro Projecteur 
+            </p>      
             <table class="table table-bordered">
             <thead>
                 <tr>
@@ -53,7 +61,7 @@
                 <th>Réserver</th>
                 </tr>
             </thead>
-            <tbody ng-repeat="salle in ctrl.salles">
+            <tbody ng-repeat="salle in ctrl.salles | filter:capa | filter:eqpmt">
                 <tr>
                 <td>{{ salle.name }}</td>
                 <td>{{ salle.description }}</td>

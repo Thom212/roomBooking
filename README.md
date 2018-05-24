@@ -1,27 +1,19 @@
-# reserve
+# roomBooking
 
-a [Sails v1](https://sailsjs.com) application
-
-
-### Links
-
-+ [Get started](https://sailsjs.com/get-started)
-+ [Sails framework documentation](https://sailsjs.com/documentation)
-+ [Version notes / upgrading](https://sailsjs.com/documentation/upgrading)
-+ [Deployment tips](https://sailsjs.com/documentation/concepts/deployment)
-+ [Community support options](https://sailsjs.com/support)
-+ [Professional / enterprise options](https://sailsjs.com/enterprise)
+a MongoDB/Sails/Angularjs application
 
 
-### Version info
+### About
 
-This app was originally generated on Sun May 20 2018 08:55:05 GMT+0200 (Romance Daylight Time) using Sails v1.0.2.
+This application let you book your meeting room, depending on the date and the time.
+You can filter the availables rooms by capacity and equipements.
 
-<!-- Internally, Sails used [`sails-generate@1.15.25`](https://github.com/balderdashy/sails-generate/tree/v1.15.25/lib/core-generators/new). -->
+### Get started
 
-
-
-<!--
-Note:  Generators are usually run using the globally-installed `sails` CLI (command-line interface).  This CLI version is _environment-specific_ rather than app-specific, thus over time, as a project's dependencies are upgraded or the project is worked on by different developers on different computers using different versions of Node.js, the Sails dependency in its package.json file may differ from the globally-installed Sails CLI release it was originally generated with.  (Be sure to always check out the relevant [upgrading guides](https://sailsjs.com/upgrading) before upgrading the version of Sails used by your app.  If you're stuck, [get help here](https://sailsjs.com/support).)
--->
-
+1) git clone the repository
+2) Install MongoDB, enable auth, create bd and bdOwner
+3) Launch mongod with --auth option 
+4) Edit the url in datastores.js to fit these infos
+5) Run "npm install" in the root directory
+6) Run "bower install" in the /assets/ directory
+7) Launch the app with "sails lift" in the root directory
